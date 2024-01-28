@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   app:
-    image: php:8.2-fpm
+    build: # 'image' キーの代わりに 'build' キーを使用
+      context: .
+      dockerfile: Dockerfile
     container_name: laravel_app
     volumes:
       - ./my-laravel-app:/var/www/html
