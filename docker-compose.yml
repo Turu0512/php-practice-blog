@@ -2,18 +2,16 @@ version: '3.8'
 
 services:
   app:
-    image: php:7.4-fpm
+    image: php:8.2-fpm
     container_name: laravel_app
     volumes:
-      - .:/var/www/html
+      - ./my-laravel-app:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - db
     environment:
       DB_HOST: db
       DB_PORT: 3306
-    ports:
-      - "8800:8000"
 
   db:
     image: mysql:5.7
@@ -32,7 +30,7 @@ services:
     image: nginx:alpine
     container_name: nginx_server
     volumes:
-      - .:/var/www/html
+      - ./my-laravel-app:/var/www/html
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "80:80"
